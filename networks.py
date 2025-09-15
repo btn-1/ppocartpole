@@ -20,24 +20,6 @@ class SimpleFCN(nn.Module):
         return self.network(x)
     
 
-class PPOPolicy(nn.Module):
-    def __init__(self, input_size, hidden_size,action_dim, network):
-        
-        super(PPOPolicy, self).__init__()
-        self.network = network
-
-        self.actor = nn.Linear(network.output_size, action_dim)
-
-        #TODO: this needs completing 
-        self.critic  = nn.Linear(network.output_size, 1)
-
-    def forward(self, x):
-        logits = self.pi(x)
-        value = self.v(x).squeeze(-1)
-        return logits, value
-    def act(self, x):
-        pass 
-    
 if __name__ == "__main__":
     test_network = SimpleFCN(4)
     x = torch.randn(1, 4)  
